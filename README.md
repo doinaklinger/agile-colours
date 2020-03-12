@@ -3,6 +3,8 @@ Browser extension for adding colours to [Zenhub](https://www.zenhub.com/) boards
 Created by team Supro to improve our process for delivering [IBM App Connect Product](https://www.ibm.com/uk-en/cloud/app-connect).
 This has been developed starting from this sample https://developer.chrome.com/extensions/getstarted
 
+Authors: [Chengxuan Xing](https://github.com/Chengxuan) [Doina Klinger](https://github.com/doinaklinger) Tom Soal
+
 ## Customise before installation
 1. Clone this repo, or download it.
 1. The plugin works for IBM github repos by default, to make it work for public github or your own private repo. Do a search using string `github.ibm.com` and replace it with your preferred domain.
