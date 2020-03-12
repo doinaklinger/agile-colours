@@ -1,7 +1,7 @@
 {
-  "name": "Agile and Colours",
-  "version": "1.0",
-  "description": "Add a colour to our zenboard! The colouring is not persisted, but it will be redrawn every 5 seconds. To stop, reload your page.",
+  "name": "Zenhub Colouring",
+  "version": "0.1",
+  "description": "Chrome plugin for colouring issues to enhance it to be used as a digital kanban.",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "background": {
     "scripts": ["applyColours.js"],
@@ -12,7 +12,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://github.com/*"],
+      "matches": ["https://github.ibm.com/*"],
       "js": ["content.js"]
     }
   ],

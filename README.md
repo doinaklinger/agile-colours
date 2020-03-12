@@ -1,29 +1,19 @@
 # zenhub-colouring-chrome-plugin
-
-## Why use the plugin
-This plugin helps to visualise multiple issues from different repositories and give them a colour coding of your choosing to make it easy to understand at a glance different threads of work.
-
-Typically, you have a number of github repos with issues and labels to represent different categories of work, different severities or priorities or other characteristics. You might already use Zenhub (https://www.zenhub.com/) for project management and have built a board.
-
-You can use this plugin to add colour coding based on your labels.
-For example, a severity 1 issue might appear as red, a story as green, a chore as yellow.
-
-
-Here is a sample output with some made up issues in a test repo and real issues from this repo.
-![Sample dashboard](https://github.com/doinaklinger/agile-colours/blob/master/images/sampleDashboard.png)
-
-## Install
-
-Choose the URL for which you want the plugin extension by clicking [here](https://github.com/doinaklinger/agile-colours/blob/master/manifest.json#L15).
-
-Go [here]( https://github.com/doinaklinger/agile-colours/blob/master/content.js#L1) and customise your colour coding.
-
-Ready to run it?
-Go to chrome://extensions/ and enable developer mode (toggle on the right hand side).
-
-
-Click on the **Load unpacked** and select this repo. The new extension
-
-## Provenance
+Browser extension for adding colours to [Zenhub](https://www.zenhub.com/) boards.
+Created by team Supro to improve our process for delivering [IBM App Connect Product](https://www.ibm.com/uk-en/cloud/app-connect).
 This has been developed starting from this sample https://developer.chrome.com/extensions/getstarted
-The plugin is distributed under Apache licence.
+
+## Customise before installation
+1. Clone this repo, or download it.
+1. The plugin works for IBM github repos by default, to make it work for public github or your own private repo. Do a search using string `github.ibm.com` and replace it with your preferred domain.
+1. The plugin has default colouring rules which is specified in [contents.js](./content.js), you can extend the JSON object to have your own rules. The existing rules supports colours for a Zenhub card(issue) with specific labels or the issue is from a repo of which name contains specific keywords.
+
+## Install - Beta
+1. Go to chrome://extensions/ and enable developer mode (toggle on the right hand side).
+1. Click on the **Load unpacked** and select this repo. The new extension
+**Zenhub Colouring** should be available.
+
+## Use
+1. Navigate to your [Zenhub](https://www.zenhub.com/) board, the extension icon should be enabled, the Zenhub issues should get coloured by default.
+1. You can hide the side toolbar by clicking on the extension and toggle on `Hide Sidebar`. As soon as you move your cursor over one of the Zenhub issues, the sidebar will disappear.
+

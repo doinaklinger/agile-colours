@@ -1,15 +1,23 @@
 var defaultColourRules = [
   {
     colour: 'lightgreen',
-    labels: ['story', 'enhancement']
+    withLabels: ['story', 'green', 'epic'],
+    repoNameContains: ['-planning', '-stories']
   },
   {
-    colour: 'lightcoral',
-    labels: ['bug','Critical']
+    colour: 'pink',
+    withLabels: ['production issue', 'pipeline break','critical','build break', 'pink'],
+    repoNameContains: ['-support','-incidents', '-test', '-tickets']
   },
   {
      colour: 'lightyellow',
-     labels: ['chore', 'documentation', 'question']
+     withLabels: ['chore', 'enhancement', 'usability', 'bug', 'yellow'],
+     repoNameContains: ['-debt', '-chore', '-usability']
+  },
+  {
+    colour: 'lightblue',
+    withLabels: ['rca-improvement', 'rca', 'blue'],
+    repoNameContains: ['-rca-tasks', '-rca']
   }
 ]
 
@@ -40,7 +48,10 @@ function paintCard(span, card, reset) {
     card.style.backgroundColor = 'white';
   } else {
     colourRules.forEach(function(rule) {
-        if (rule.labels.indexOf(span.textContent) >= 0) {
+        if (
+          typeof span.textContent === 'string' &&
+          (rule.withLabels.includes(span.textContent.toLowerCase()) || rule.repoNameContains.some(r => span.textContent.includes(r)))
+        ) {
           card.style.backgroundColor = rule.colour;
         }
     })
