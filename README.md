@@ -1,6 +1,8 @@
 # zenhub-colouring-chrome-plugin
 Browser extension for adding colours to [Zenhub](https://www.zenhub.com/) boards.
+
 Created by team Supro to improve our process for delivering [IBM App Connect Product](https://www.ibm.com/uk-en/cloud/app-connect).
+
 This has been developed starting from this sample https://developer.chrome.com/extensions/getstarted
 
 Authors: [Chengxuan Xing](https://github.com/Chengxuan) , [Doina Klinger](https://github.com/doinaklinger) , [Tom Soal](https://github.com/tomsoal)
