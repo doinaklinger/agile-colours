@@ -1,7 +1,7 @@
 {
   "name": "Zenhub Colouring",
   "version": "0.0.0.1",
-  "description": "Chrome plugin for colouring issues to enhance it to be used as a digital kanban.",
+  "description": "Chrome plugin for colouring Zenhub issues to enhance it to be used as a digital kanban.",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "background": {
     "scripts": ["applyColours.js"],
@@ -17,10 +17,10 @@
     }
   ],
   "icons": {
-    "16": "images/funnel_colours16.png",
-    "32": "images/funnel_colours32.png",
-    "48": "images/funnel_colours48.png",
-    "128": "images/funnel_colours128.png"
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
   },
-  "manifest_version": 2
+  "manifest_version": 1
 }
