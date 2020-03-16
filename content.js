@@ -1,81 +1,99 @@
-var defaultColourRules = [
-  {
-    colour: 'lightgreen',
-    withLabels: ['story', 'green', 'epic'],
-    repoNameContains: ['-planning', '-stories']
-  },
-  {
-    colour: 'pink',
-    withLabels: ['production issue', 'pipeline break','critical','build break', 'pink'],
-    repoNameContains: ['-support','-incidents', '-test', '-tickets']
-  },
-  {
-     colour: 'lightyellow',
-     withLabels: ['chore', 'enhancement', 'usability', 'bug', 'yellow'],
-     repoNameContains: ['-debt', '-chore', '-usability']
-  },
-  {
-    colour: 'lightblue',
-    withLabels: ['rca-improvement', 'rca', 'blue'],
-    repoNameContains: ['-rca-tasks', '-rca']
+function handleColour(applyColour, colourSettings) {
+  if (!Array.isArray(colourSettings.widgets)) {
+    console.error('Invalid colour settings!')
+    console.error(colourSettings)
+    return
   }
-]
+  colourSettings.widgets.forEach(widget => {
+    let elements = document.getElementsByClassName(widget.className);
+    for (let element of elements) {
+      if (applyColour) {
 
-
-var colourRules = defaultColourRules
-
-function repaint() {
-  var cards = document.getElementsByClassName('zhc-issue-card');
-  let sidebar = document.getElementsByClassName('zhc-sidebar')[0];
-  chrome.storage.sync.get('toggles', function(data) {
-    if (data.toggles.hidesidebar) {
-      sidebar.setAttribute('style', "visibility: hidden; width: 0;");
-    } else {
-      sidebar.removeAttribute('style');
-    }
-    for (var i = 0, l = cards.length; i < l; i++) {
-      var card = cards[i];
-      var spans = card.getElementsByTagName('span');
-      for (var j= 0; j< spans.length; j++) {
-        paintCard(spans[j], card, !data.toggles.colourissue);
+        widget.rules.forEach(rule => {
+          if (typeof rule.colour !== 'string' || !Array.isArray(rule.textMatchers)) {
+            console.error('Invalid colour rule!')
+            console.error(rule)
+            return
+          }
+          const shouldColour = rule.textMatchers.some(matcher => {
+            let subTextElements = element.getElementsByClassName(matcher.className)
+            let equalResult = false
+            let endsWithResult = false
+            for (let subTextElement of subTextElements) {
+              if (Array.isArray(matcher.equal)) {
+                equalResult = equalResult || matcher.equal.some(eqText => subTextElement.textContent.toLowerCase() === eqText.toLowerCase())
+              }
+              if (Array.isArray(matcher.endsWith)) {
+                endsWithResult = endsWithResult || matcher.endsWith.some(suffixText => subTextElement.textContent.toLowerCase().endsWith(suffixText.toLowerCase()))
+              }
+              if (equalResult || endsWithResult) {
+                break
+              }
+            }
+            return equalResult || endsWithResult
+          })
+          if (shouldColour) {
+            element.style.backgroundColor = rule.colour;
+          }
+        })
+      } else {
+        element.style.backgroundColor = 'white';
       }
     }
-  });
+  })
 }
 
-function paintCard(span, card, reset) {
-  if (reset) {
-    card.style.backgroundColor = 'white';
-  } else {
-    colourRules.forEach(function(rule) {
-        if (
-          typeof span.textContent === 'string' &&
-          (rule.withLabels.includes(span.textContent.toLowerCase()) || rule.repoNameContains.some(r => span.textContent.includes(r)))
-        ) {
-          card.style.backgroundColor = rule.colour;
-        }
-    })
+function handleHide(hideoptions, hideSettings) {
+  if (!Array.isArray(hideSettings.widgets)) {
+    console.error('Invalid hide settings!')
+    console.error(hideSettings)
+    return
   }
+  hideSettings.widgets.forEach(widget => {
+    let elements = document.getElementsByClassName(widget.className);
+    for (let element of elements) {
+      if (hideoptions) {
+        element.setAttribute('style', "visibility: hidden; width: 0; height:0;");
+      } else {
+        element.removeAttribute('style');
+      }
+    }
+  })
+
+}
+
+function repaint() {
+  chrome.storage.sync.get(['toggles', 'profile'], function (data) {
+    if (data.profile.hide) {
+      handleHide(data.toggles.hideoptions, data.profile.hide)
+    }
+
+    if (data.profile.colour) {
+      handleColour(data.toggles.applycolour, data.profile.colour)
+    }
+  });
 }
 
 let painting = false
 const paintDebounce = 5
 
-function check () {
+function check() {
   setTimeout(() => {
-    if (!document.getElementsByClassName('zh-app__workspace')[0]) {
-      check()
-    } else {
-      document.getElementsByClassName('zh-app__workspace')[0].addEventListener('DOMSubtreeModified', () => {
-        if (!painting) {
-          painting = true
+    chrome.storage.sync.get(['profile'], function (data) {
+      if (!document.getElementsByClassName(data.profile.className)[0]) {
+        check()
+      } else {
+        document.getElementsByClassName(data.profile.className)[0].addEventListener('DOMSubtreeModified', () => {
+          if (!painting) {
+            painting = true
             repaint();
-          setTimeout(() => {
-            painting = false
-          }, paintDebounce)
-        }
-      });
-    }
+            setTimeout(() => {
+              painting = false
+            }, paintDebounce)
+          }
+        });
+      }
+    });
   }, paintDebounce);
 }
 

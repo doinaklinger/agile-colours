@@ -4,26 +4,26 @@
 
 'use strict';
 
-let colourIssueCheckBox, hideSidebarCheckBox
+let applyColourCheckBox, hideOptionsCheckBox
 
 document.addEventListener('DOMContentLoaded', function () {
-    colourIssueCheckBox = document.getElementById('cb-colourissue');
-    hideSidebarCheckBox = document.getElementById('cb-hidesidebar');
+    applyColourCheckBox = document.getElementById('cb-applycolour');
+    hideOptionsCheckBox = document.getElementById('cb-hideoptions');
 
     function updateTogglesData () {
         chrome.storage.sync.set({toggles: {
-            colourissue: colourIssueCheckBox.checked,
-            hidesidebar: hideSidebarCheckBox.checked
+            applycolour: applyColourCheckBox.checked,
+            hideoptions: hideOptionsCheckBox.checked
           }});
     }
     chrome.storage.sync.get('toggles', function(data) {
-        colourIssueCheckBox.checked = data.toggles.colourissue;
-        hideSidebarCheckBox.checked = data.toggles.hidesidebar;
-        colourIssueCheckBox.addEventListener('change', () => {
+        applyColourCheckBox.checked = data.toggles.applycolour;
+        hideOptionsCheckBox.checked = data.toggles.hideoptions;
+        applyColourCheckBox.addEventListener('change', () => {
             updateTogglesData();
         });
-        hideSidebarCheckBox.addEventListener('change', () => {
+        hideOptionsCheckBox.addEventListener('change', () => {
             updateTogglesData();
         });
     });
-  });
+});

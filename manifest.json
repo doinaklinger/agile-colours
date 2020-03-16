@@ -2,7 +2,7 @@
   "name": "Zenhub Colouring",
   "version": "0.0.0.1",
   "description": "Chrome plugin for colouring Zenhub issues to enhance it to be used as a digital kanban.",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": ["declarativeContent", "storage"],
   "background": {
     "scripts": ["applyColours.js"],
     "persistent": false
