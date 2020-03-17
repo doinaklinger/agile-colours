@@ -29,7 +29,7 @@ chrome.runtime.onInstalled.addListener(function () {
             "colour": "pink",
             "textMatchers": [{
               "className": "zhc-issue-card__repo-name",
-              "endsWith":  ['-support', '-incidents', '-test', '-tickets']
+              "endsWith": ['-support', '-incidents', '-test', '-tickets']
             }, {
               "className": "zhc-label",
               "equal": ['production issue', 'pipeline break', 'critical', 'build break', 'pink']
@@ -47,7 +47,7 @@ chrome.runtime.onInstalled.addListener(function () {
             "colour": "lightblue",
             "textMatchers": [{
               "className": "zhc-issue-card__repo-name",
-              "endsWith":  ['-rca-tasks', '-rca']
+              "endsWith": ['-rca-tasks', '-rca']
             }, {
               "className": "zhc-label",
               "equal": ['rca-improvement', 'rca', 'blue']
@@ -64,14 +64,5 @@ chrome.runtime.onInstalled.addListener(function () {
       }
 
     }
-  });
-
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
-    chrome.declarativeContent.onPageChanged.addRules([{
-      conditions: [new chrome.declarativeContent.PageStateMatcher({
-        pageUrl: { hostEquals: 'github.ibm.com' },
-      })],
-      actions: [new chrome.declarativeContent.ShowPageAction()]
-    }]);
   });
 });

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    textarea:read-only {
+      background-color: lightgray;
+    }
+    .profile-button {
+      height: 20px;
+      width: 80px;
+    }
+    .profile-switch {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .profile-editor {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .profile-editor__main {
+      width: 600px;
+      height: 800px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Choose a default profile or create your own one:</h2>
+  <div class="profile-switch">
+    <label for="label-profile">Select a profile:</label>
+    <select id="select-profile">
+      <option value="custom">Custom</option>
+      <option value="zenhub">Zenhub</option>
+    </select>
+    <label>  <b>OR</b>  import a profile:</label>
+    <input id="input-profile" type="file" accept=".json"></input>
+  </div>
+  <div class="profile-editor">
+    <textarea class="profile-editor__main" id="ta-profile"></textarea>
+    <div class="button-group">
+      <button id="btn-download" class="profile-button">Download</button>
+      <button id="btn-apply"class="profile-button">Apply</button>
+    </div>
+  </div>
+</body>
+<script src="options.js"></script>
+
+</html>
