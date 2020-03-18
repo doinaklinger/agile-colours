@@ -7,12 +7,14 @@ This has been developed starting from this sample https://developer.chrome.com/e
 
 Authors: [Chengxuan Xing](https://github.com/Chengxuan) , [Doina Klinger](https://github.com/doinaklinger) , [Tom Soal](https://github.com/tomsoal)
 
-## Customise before installation
+## Offical installation
+From [Google Chrome Web Store](https://chrome.google.com/webstore/detail/zenhub-colouring/mfodgjcicmhkkijkagclkhgpfnedicie)
+
+## Customise before development installation
 1. Clone this repo, or download it.
 1. The plugin works for IBM github repos by default, to make it work for public github or your own private repo. Do a search using string `github.ibm.com` and replace it with your preferred domain.
-1. The plugin has default colouring rules which is specified in [contents.js](./content.js), you can extend the JSON object to have your own rules. The existing rules supports colours for a Zenhub card(issue) with specific labels or the issue is from a repo of which name contains specific keywords.
 
-## Install - Beta
+## Development Installation
 1. Go to chrome://extensions/ and enable developer mode (toggle on the right hand side).
 1. Click on the **Load unpacked** and select this repo. The new extension
 **Zenhub Colouring** should be available.
