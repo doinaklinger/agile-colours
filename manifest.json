@@ -1,6 +1,6 @@
 {
   "name": "Zenhub Colouring",
-  "version": "0.0.0.2",
+  "version": "0.0.0.3",
   "description": "Chrome plugin for colouring Zenhub issues to enhance it to be used as a digital kanban.",
   "permissions": ["declarativeContent", "storage"],
   "background": {
@@ -10,7 +10,10 @@
   "browser_action": {
     "default_popup": "popup.html"
   },
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
   "content_scripts": [
     {
       "matches": ["https://github.ibm.com/*"],

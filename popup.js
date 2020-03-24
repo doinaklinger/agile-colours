@@ -4,11 +4,20 @@
 
 'use strict';
 
-let applyColourCheckBox, hideOptionsCheckBox
+let applyColourCheckBox, hideOptionsCheckBox, optionButton
 
 document.addEventListener('DOMContentLoaded', function () {
     applyColourCheckBox = document.getElementById('cb-applycolour');
     hideOptionsCheckBox = document.getElementById('cb-hideoptions');
+    optionButton = document.getElementById('btn-options');
+
+    optionButton.addEventListener('click', function() {
+        if (chrome.runtime.openOptionsPage) {
+          chrome.runtime.openOptionsPage();
+        } else {
+          window.open(chrome.runtime.getURL('options.html'));
+        }
+      });
 
     function updateTogglesData () {
         chrome.storage.sync.set({toggles: {
