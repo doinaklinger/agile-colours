@@ -7,8 +7,8 @@ function handleColour(applyColour, colourSettings) {
   colourSettings.widgets.forEach(widget => {
     let elements = document.getElementsByClassName(widget.className);
     for (let element of elements) {
+      let colour = 'white'
       if (applyColour) {
-
         widget.rules.forEach(rule => {
           if (typeof rule.colour !== 'string' || !Array.isArray(rule.textMatchers)) {
             console.error('Invalid colour rule!')
@@ -33,12 +33,11 @@ function handleColour(applyColour, colourSettings) {
             return equalResult || endsWithResult
           })
           if (shouldColour) {
-            element.style.backgroundColor = rule.colour;
+            colour = rule.colour;
           }
         })
-      } else {
-        element.style.backgroundColor = 'white';
       }
+      element.style.backgroundColor = colour;
     }
   })
 }
