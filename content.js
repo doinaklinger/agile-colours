@@ -19,6 +19,8 @@ function handleColour(applyColour, colourSettings) {
             let subTextElements = element.getElementsByClassName(matcher.className)
             let equalResult = false
             let endsWithResult = false
+            let startsWithResult = false
+            let includesResult = false
             for (let subTextElement of subTextElements) {
               if (Array.isArray(matcher.equal)) {
                 equalResult = equalResult || matcher.equal.some(eqText => subTextElement.textContent.toLowerCase() === eqText.toLowerCase())
@@ -26,11 +28,17 @@ function handleColour(applyColour, colourSettings) {
               if (Array.isArray(matcher.endsWith)) {
                 endsWithResult = endsWithResult || matcher.endsWith.some(suffixText => subTextElement.textContent.toLowerCase().endsWith(suffixText.toLowerCase()))
               }
-              if (equalResult || endsWithResult) {
+              if (Array.isArray(matcher.startsWith)) {
+                startsWithResult = startsWithResult || matcher.startsWith.some(suffixText => subTextElement.textContent.toLowerCase().startsWith(suffixText.toLowerCase()))
+              }
+              if (Array.isArray(matcher.includes)) {
+                includesResult = includesResult || matcher.includes.some(suffixText => subTextElement.textContent.toLowerCase().includes(suffixText.toLowerCase()))
+              }
+              if (equalResult || endsWithResult || startsWithResult || includesResult) {
                 break
               }
             }
-            return equalResult || endsWithResult
+            return equalResult || endsWithResult || startsWithResult || includesResult
           })
           if (shouldColour) {
             colour = rule.colour;
