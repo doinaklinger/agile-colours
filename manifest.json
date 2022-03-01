@@ -1,6 +1,6 @@
 {
   "name": "Zenhub Colouring",
-  "version": "0.0.0.4",
+  "version": "0.0.0.5",
   "description": "Chrome plugin for colouring Zenhub issues to enhance it to be used as a digital kanban.",
   "permissions": ["declarativeContent", "storage"],
   "background": {
