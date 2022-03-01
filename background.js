@@ -87,11 +87,11 @@ chrome.runtime.onInstalled.addListener(function () {
             "widgets": [{
               "queryType": "className",
               "queryText": "zhc-sidebar",
-              "stylePropertiesOverrides": {"width": "0"}
+              "stylePropertiesOverrides": {"width": "0", "visibility": "hidden"}
             }, {
               "queryType": "className",
               "queryText": "zhc-board__menu",
-              "stylePropertiesOverrides": {"height": "0"}
+              "stylePropertiesOverrides": {"height": "0", "visibility": "hidden"}
             }]
           }
         }

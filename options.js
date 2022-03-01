@@ -83,11 +83,11 @@ const builtInProfiles = [{
     "widgets": [{
       "queryType": "className",
       "queryText": "zhc-sidebar",
-      "stylePropertiesOverrides": {"width": "0","visibility": "hidden"}
+      "stylePropertiesOverrides": {"width": "0", "visibility": "hidden"}
     }, {
       "queryType": "className",
       "queryText": "zhc-board__menu",
-      "stylePropertiesOverrides": {"height": "0","visibility": "hidden"}
+      "stylePropertiesOverrides": {"height": "0", "visibility": "hidden"}
     }]
   }
 }]
