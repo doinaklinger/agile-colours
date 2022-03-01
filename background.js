@@ -5,7 +5,7 @@
 'use strict';
 
 chrome.runtime.onInstalled.addListener(function () {
-  chrome.storage.sync.get('profile', function(data) {
+  chrome.storage.sync.get('profile', function (data) {
     if (!data.profile) {
       chrome.storage.sync.set({
         toggles: {
@@ -14,59 +14,88 @@ chrome.runtime.onInstalled.addListener(function () {
         },
         profile: {
           "name": "zenhub",
-          "className": "zh-app__workspace",
+          "queryType": "className",
+          "queryText": "zh-app__workspace",
           "colour": {
             "widgets": [{
-              "className": "zhc-issue-card",
+              "queryType": "className",
+              "queryText": "zhc-issue-card",
               "rules": [{
                 "colour": "lightgreen",
                 "textMatchers": [{
-                  "className": "zhc-issue-card__repo-name",
+                  "queryType": "className",
+                  "queryText": "zhc-issue-card__repo-name",
                   "endsWith": ['-planning', '-stories']
                 }, {
-                  "className": "zhc-label",
-                  "equal": ['story', 'green', 'epic']
+                  "queryType": "className",
+                  "queryText": "zhc-issue-card__meta__badges",
+                  "children": {
+                    "queryType": "tagName",
+                    "queryText": "span",
+                    "equal": ['story', 'epic']
+                  }
                 }]
               }, {
                 "colour": "pink",
                 "textMatchers": [{
-                  "className": "zhc-issue-card__repo-name",
+                  "queryType": "className",
+                  "queryText": "zhc-issue-card__repo-name",
                   "endsWith": ['-support', '-incidents', '-test', '-tickets']
                 }, {
-                  "className": "zhc-label",
-                  "equal": ['production issue', 'pipeline break', 'critical', 'build break', 'pink']
+                  "queryType": "className",
+                  "queryText": "zhc-issue-card__meta__badges",
+                  "children": {
+                    "queryType": "tagName",
+                    "queryText": "span",
+                    "equal": ['production issue', 'pipeline break', 'critical', 'build break']
+                  }
                 }]
               }, {
                 "colour": "lightyellow",
                 "textMatchers": [{
-                  "className": "zhc-issue-card__repo-name",
+                  "queryType": "className",
+                  "queryText": "zhc-issue-card__repo-name",
                   "endsWith": ['-debt', '-chore', '-usability']
                 }, {
-                  "className": "zhc-label",
-                  "equal": ['chore', 'enhancement', 'usability', 'bug', 'yellow']
+                  "queryType": "className",
+                  "queryText": "zhc-issue-card__meta__badges",
+                  "children": {
+                    "queryType": "tagName",
+                    "queryText": "span",
+                    "equal": ['chore', 'enhancement', 'usability', 'bug']
+                  }
                 }]
               }, {
                 "colour": "lightblue",
                 "textMatchers": [{
-                  "className": "zhc-issue-card__repo-name",
+                  "queryType": "className",
+                  "queryText": "zhc-issue-card__repo-name",
                   "endsWith": ['-rca-tasks', '-rca']
                 }, {
-                  "className": "zhc-label",
-                  "equal": ['rca-improvement', 'rca', 'blue']
+                  "queryType": "className",
+                  "queryText": "zhc-issue-card__meta__badges",
+                  "children": {
+                    "queryType": "tagName",
+                    "queryText": "span",
+                    "equal": ['rca-improvement', 'rca']
+                  }
                 }]
               }]
             }]
           },
           "hide": {
             "widgets": [{
-              "className": "zhc-sidebar"
+              "queryType": "className",
+              "queryText": "zhc-sidebar",
+              "stylePropertiesOverrides": {"width": "0"}
             }, {
-              "className": "zhc-board__menu"
+              "queryType": "className",
+              "queryText": "zhc-board__menu",
+              "stylePropertiesOverrides": {"height": "0"}
             }]
           }
-    
         }
       });
     }
-});
+  });
 });
